@@ -10,12 +10,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class AppController {
-	@GetMapping("home")
+	
+	EmployeeRepo repo;
+	
+	@RequestMapping("/")
+	public String root() {
+		return "home";
+	}
+	
+	@RequestMapping("details")
+	public String details(Employee employee) {
+		repo.save(employee);
+		return "home";
+	}
+	
+	@RequestMapping("home")
 	public String home() {
 		return "home";
 	}
 	
-	@PostMapping("details")
+	/*@PostMapping("details")
 	public String details(@RequestParam("emp_name")String emp_name,
 			@RequestParam("emp_id")String emp_id,
 			@RequestParam("emp_email")String emp_email,
@@ -25,5 +39,5 @@ public class AppController {
 		modelMap.put("emp_email", emp_email);
 		modelMap.put("emp_no", emp_no);
 		return "details";
-	}
+	}*/
 }
